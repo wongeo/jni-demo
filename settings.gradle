@@ -1,3 +1,5 @@
-include ':cpplib'
 include ':app'
 rootProject.name = "JNIDemo"
+
+include ':cpp-lib-android'
+project(':cpp-lib-android').projectDir = file('../cpp-lib-android')

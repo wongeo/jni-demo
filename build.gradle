@@ -1,15 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        maven = 'http://maven.aliyun.com/nexus/content/groups/public/'
-        maven2 = 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
-        maven3 = 'https://gitee.com/wongeo/repo/raw/main/'
+        maven = [
+                'http://maven.aliyun.com/nexus/content/groups/public/',
+                'http://maven.aliyun.com/nexus/content/repositories/jcenter',
+                'https://gitee.com/wongeo/repo/raw/main/',
+                'http://mvnrepo.alibaba-inc.com/mvn/repository'
+        ]
     }
     repositories {
         mavenLocal()
-        maven { url rootProject.ext.maven }
-        maven { url rootProject.ext.maven2 }
-        maven { url rootProject.ext.maven3 }
+        rootProject.ext.maven.each {
+            def _url = it;
+            maven { url _url }
+        }
         google()
         jcenter()
     }
@@ -24,9 +28,10 @@ buildscript {
 allprojects {
     repositories {
         mavenLocal()
-        maven { url rootProject.ext.maven }
-        maven { url rootProject.ext.maven2 }
-        maven { url rootProject.ext.maven3 }
+        rootProject.ext.maven.each {
+            def _url = it;
+            maven { url _url }
+        }
         google()
         jcenter()
     }
